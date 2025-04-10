@@ -26,11 +26,15 @@ public class Order {
 
     @Builder
     public Order(Long orderId, Long userId, Long totalPrice, List<OrderItem> orderItems) {
-        validation(orderItems, totalPrice);
+        validation(totalPrice);
         this.orderId = orderId;
         this.userId = userId;
         this.totalPrice = totalPrice;
         this.orderItems = orderItems;
+    }
+
+    public Order create(Long userId, Long totalPrice, List<OrderItem> orderItems) {
+        return new Order(orderId, userId, totalPrice, orderItems);
     }
 
     public void calcTotalPrice() {
@@ -39,9 +43,9 @@ public class Order {
                 .sum();
     }
 
-    private void validation(List<OrderItem> orderItems, Long totalPrice) {
-        if(orderItems.isEmpty()) {
-            throw new IllegalArgumentException("주문 품목이 존재하지 않습니다.");
+    private void validation(Long totalPrice) {
+        if(totalPrice <= 0) {
+            throw new IllegalArgumentException("잘못된 주문 금액입니다.");
         }
     }
 }
