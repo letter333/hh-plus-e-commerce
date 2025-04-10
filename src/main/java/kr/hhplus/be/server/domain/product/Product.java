@@ -22,14 +22,14 @@ public class Product {
 
     @Builder
     public Product(Long productId, String name, Long price, int stock) {
-        validate(name, price);
+        validation(name, price);
         this.productId = productId;
         this.name = name;
         this.price = price;
         this.stock = stock;
     }
 
-    private void validate(String name, Long price) {
+    private void validation(String name, Long price) {
         if(name == null || name.isBlank() == true) {
             throw new IllegalArgumentException("상품 이름은 필수입니다.");
         }

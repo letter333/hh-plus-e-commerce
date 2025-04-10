@@ -37,11 +37,13 @@ public class Point {
     }
 
     public long charge(Long amount) {
-        this.point += amount;
+        Long result = this.point + amount;
 
-        if (this.point > MAX_POINT) {
+        if (result > MAX_POINT) {
             throw new IllegalArgumentException("최대 충전 금액을 초과했습니다.");
         }
+
+        this.point = result;
 
         return this.point;
     }
